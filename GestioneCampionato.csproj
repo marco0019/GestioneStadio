@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Campionato.cs" />
+    <Compile Include="Graphic.cs" />
     <Compile Include="Partita.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Program.cs" />

@@ -1,0 +1,8 @@
+C:\Users\Marco\Desktop\GestioneStadio\obj\Debug\GestioneCampionato.csproj.AssemblyReference.cache
+C:\Users\Marco\Desktop\GestioneStadio\obj\Debug\GestioneCampionato.csproj.SuggestedBindingRedirects.cache
+C:\Users\Marco\Desktop\GestioneStadio\obj\Debug\GestioneCampionato.csproj.CoreCompileInputs.cache
+C:\Users\Marco\Desktop\GestioneStadio\bin\Debug\GestioneCampionato.exe.config
+C:\Users\Marco\Desktop\GestioneStadio\bin\Debug\GestioneCampionato.exe
+C:\Users\Marco\Desktop\GestioneStadio\bin\Debug\GestioneCampionato.pdb
+C:\Users\Marco\Desktop\GestioneStadio\obj\Debug\GestioneCampionato.exe
+C:\Users\Marco\Desktop\GestioneStadio\obj\Debug\GestioneCampionato.pdb
