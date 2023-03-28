@@ -9,12 +9,16 @@ namespace GestioneCampionato
 		public static void WindowSize(int width, int height)
 		{
 			Console.SetWindowPosition(0, 0);
-			try
+			if(Console.WindowWidth > width)
+			{
+				Console.SetWindowSize(width, height);
+				Console.SetBufferSize(width, height);
+			}
+			else
 			{
 				Console.SetBufferSize(width, height);
 				Console.SetWindowSize(width, height);
 			}
-			catch(Exception ex) { }
 		}
 		public static void Rect(int x, int y, string text="  ", ConsoleColor bg=ConsoleColor.Black, ConsoleColor fg = ConsoleColor.Black, bool setBG= true)
 		{

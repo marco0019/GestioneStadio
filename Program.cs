@@ -10,7 +10,7 @@ namespace GestioneCampionato
 	{
 		static void Main(string[] args)
 		{
-			Graphic.Corner(1, 1, 20, 10, ConsoleColor.White, 1);
+			new Persona("fabrizio", "gay", "fbrgay10p05b114m", DateTime.Now).Visualizza();
 			Console.ReadKey();
 		}
 	}
