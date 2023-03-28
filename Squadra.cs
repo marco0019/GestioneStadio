@@ -22,5 +22,9 @@ namespace GestioneCampionato
 		{
 
 		}
+		public void Visualizza()
+		{
+
+		}
 	}
 }

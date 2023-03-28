@@ -8,14 +8,19 @@ namespace GestioneCampionato
 {
 	class Partita
 	{
-		private Squadra casa, ospite;
-		private int goalCasa, goalOspite;
-		private Persona arbitro;
-		public Squadra SquadraCasa { get => casa; }
-		public Squadra SquadraOspite { get => ospite; }
-		public Persona Arbitro { get => arbitro; }
-		public int GoalCasa { get => goalOspite; }
-		public int GoalOspite { get => goalOspite; }
+		public Squadra SquadraCasa { get; private set; }
+		public Squadra SquadraOspite { get; private set; }
+		public Persona Arbitro { get; private set; }
+		public int GoalCasa { get; private set; }
+		public int GoalOspite { get; private set; }
+		public void Match()
+		{
+			GoalCasa = new Random().Next(new Random().Next(0, 2), new Random().Next(5, 10));
+			GoalOspite = new Random().Next(new Random().Next(0, 2), new Random().Next(5, 10));
+		}
+		public void VisualizzaRisultato()
+		{
 
+		}
 	}
 }
