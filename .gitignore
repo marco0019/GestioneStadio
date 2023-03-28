@@ -44,7 +44,6 @@
 *.idb
 *.pdb
 *.vs/
-Properties/
 obj/
 bin/
 # Kernel Module Compile Results

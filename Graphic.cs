@@ -35,8 +35,9 @@ namespace GestioneCampionato
 			}
 			Console.ResetColor();
 		}
-		public static void Corner(int x, int y, int width, int height, ConsoleColor fg, int delay=0)
+		public static void Corner(int x, int y, int width, int height, ConsoleColor fg, int delay=0, bool setSize=false)
 		{
+			if(setSize)WindowSize(width + x + 2, height + y + 1);
 			Console.CursorVisible = false;
 			Rect(x, y, border[5].ToString(), fg: fg, setBG: false);
 			Line(x, y + 1, height - 1, true, fg, delay);
@@ -138,6 +139,54 @@ namespace GestioneCampionato
 			};
 			transitions[type % transitions.Length]();
 			Console.SetWindowPosition(0, 0);
+		}
+		public static void Switcher(string title, int x, int y, string[] texts, Action[] method, ref int index, int delay, int font = 0, bool responsive = false, bool center = false)
+		{
+			int[] lineHeight = { 1, 12, 2, 6, 1 };
+			int width = 0;
+			if (font != -1) width = Word(x + 3, y + 1, title, font: font, delay: 5) + 4;
+			if (width < 50) width = 50;
+			Corner(x, y, width, texts.Length + lineHeight[font + 1] + 3, ConsoleColor.White, delay: delay);
+			DrawSwitcher(x, y, texts, index, lineHeight[font + 1] + 1, responsive, center, width);
+			while (true)
+				if (Console.KeyAvailable)
+				{
+					var key = Console.ReadKey(true).Key;
+					if (key == ConsoleKey.W | key == ConsoleKey.UpArrow) { index = index > 0 ? index - 1 : texts.Length - 1; DrawSwitcher(x, y, texts, index, lineHeight[font + 1] + 1, responsive, center, width); }
+					if (key == ConsoleKey.S | key == ConsoleKey.DownArrow) { index = index < texts.Length - 1 ? index + 1 : 0; DrawSwitcher(x, y, texts, index, lineHeight[font + 1] + 1, responsive, center, width); }
+					if (key == ConsoleKey.Enter | key == ConsoleKey.Spacebar) break;
+					if (key == ConsoleKey.LeftArrow | key == ConsoleKey.A) if (index + texts.Length / 2 < texts.Length) index += texts.Length / 2;
+					if (key == ConsoleKey.D | key == ConsoleKey.RightArrow) if (index - (texts.Length - texts.Length / 2) > -1) index -= texts.Length - texts.Length / 2;
+				}
+			method[index]();
+			Console.ReadKey();
+		}
+
+		static void DrawSwitcher(int x, int y, string[] texts, int index, int lineHeight, bool responsive, bool center, int width)
+		{
+			ConsoleColor[] color = { ConsoleColor.White, ConsoleColor.Black };
+			if (center)
+			{
+				if (responsive)
+					x += (width - 35) < 0 ? 0 : (width - 35) / 2;
+				else x += (width - 55) < 0 ? 0 : (width - 55) / 2;
+			}
+			if(responsive) for (int i = 0; i < texts.Length; i++)
+					Rect(x + 2, y + i + lineHeight + 1, StringFormat(i == index ? " <" + texts[i] + ">" : "  " + texts[i], 30, "center"), color[Convert.ToInt16(index != i)], color[Convert.ToInt16(index == i)], setBG: index == i);
+			else
+			{
+				for (int i = 0; i < Math.Round(texts.Length / Convert.ToDouble(2)); i++)
+					Rect(x + 2, y + i * 2 + lineHeight + 1, i == index ? " <" + StringFormat(texts[i] + ">", 20) : "  " + StringFormat(texts[i], 20), color[Convert.ToInt16(index != i)], color[Convert.ToInt16(index == i)], setBG: index == i);
+				for (int i = (int)Math.Round(texts.Length / Convert.ToDouble(2)); i < texts.Length; i++) Rect(x + 27, y + (i - (int)Math.Round(texts.Length / Convert.ToDouble(2))) * 2 + lineHeight + 1, i == index ? " <" + StringFormat(texts[i] + ">", 20) : "  " + StringFormat(texts[i], 20), color[Convert.ToInt16(index != i)], color[Convert.ToInt16(index == i)], setBG: index == i);
+			}
+		}
+		static string StringFormat(string text, int target, string textAlign="start")
+		{
+			int difference = target - text.Length;
+			if (textAlign == "start") for (int i = 0; i < difference; i++) text += " ";
+			else if (textAlign == "center") for (int i = 0; i < difference; i++) text = i % 2 != 0 ? " " + text : text + " ";
+			else if (textAlign == "end") for (int i = 0; i < difference; i++) text = " " + text;
+			return text;
 		}
 	}
 }
