@@ -56,3 +56,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/.vs/GestioneCampionato/v17/.suo
+/bin/Debug/GestioneCampionato.exe
+/bin/Debug/GestioneCampionato.pdb
+/obj/Debug/GestioneCampionato.csproj.FileListAbsolute.txt
+/obj/Debug/GestioneCampionato.exe
+/obj/Debug/GestioneCampionato.pdb
