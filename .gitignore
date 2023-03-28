@@ -13,7 +13,9 @@
 *.ilk
 *.map
 *.exp
-
+*.exe
+*.pdb
+*.suo
 # Precompiled Headers
 *.gch
 *.pch
