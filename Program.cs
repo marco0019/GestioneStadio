@@ -9,39 +9,106 @@ namespace GestioneCampionato
 {
 	class Program
 	{
+		public static List<Squadra> squadre = new List<Squadra>();
+		public static List<String> nomiSquadre = new List<String>();
+		public static List<String[]> listaGiocatori = new List<String[]>();
+		public static StreamReader SR = new StreamReader("DB_Giocatori.txt");
+		public static List<String[]> giocatoriSplitted = new List<String[]>();
 		static void Main(string[] args)
 		{
+			List<Persona> giocatori = new List<Persona>();
 			int index = 0;
+
 			Action[] metodi =
 			{
-				delegate(){ Console.WriteLine("metodo 1"); },
-				delegate(){ Console.WriteLine("metodo 2"); },
-				delegate(){ Console.WriteLine("metodo 3"); },
-				delegate(){ Console.WriteLine("metodo 4"); },
-				delegate(){ Console.WriteLine("metodo 5"); },
-				delegate(){ Console.WriteLine("metodo 6"); },
-				delegate(){ Console.WriteLine("metodo 7"); },
-				delegate(){ Console.WriteLine("metodo 8"); },
+				delegate () { Console.WriteLine("metodo 1"); },
+				delegate () { Console.WriteLine("metodo 2"); },
+				delegate () { Console.WriteLine("metodo 3"); },
+				delegate () { Console.WriteLine("metodo 4"); },
+				delegate () { Console.WriteLine("metodo 5"); },
+				delegate () { Console.WriteLine("metodo 6"); },
+				delegate () { Console.WriteLine("metodo 7"); },
+				delegate () { Console.WriteLine("metodo 8"); },
 			};
-			//Graphic.Switcher("menumolto lungo", 0, 0, new string[] { "partita", "campionato", "giocatori", "classifica", "giocatori", "arbitri", "allenatori", "exit" }, metodi, ref index, 0, 1, true, true);
-			//new Persona("fabrizio", "gay", "fbrgay10p05b114m", DateTime.Now).Visualizza();
-			//Console.ReadKey();
 
-			StreamReader SR = new StreamReader("DB_Giocatori.txt");
-			String[] Giocatori = new String[10];
 
-            for (int i = 0; i < 10; i++)
+
+
+
+			//		DA DECIDERE SE LASCIARE SU PROGRAM O SPOSTARE SU CAMPIONATO
+
+			
+
+			void getSquadre()
             {
-				Giocatori[i] = SR.ReadLine();
-            }
-			Console.ReadKey();
+				List<String> giocatoriLetti = new List<String>();
 
-			String[] pl1 = Giocatori[0].Split(',');
-            for (int i = 0; i < pl1.Length; i++)
-            {
-				Console.WriteLine(pl1[i]);
+				for (int i = 0; !SR.EndOfStream; i++)
+				{
+					giocatoriLetti.Add(SR.ReadLine());
+				}
+
+                for(int i = 0; i < giocatoriLetti.Count; i++)
+                {
+                    giocatoriSplitted.Add(giocatoriLetti[i].Split(','));
+					findSquadre(giocatoriSplitted[i][3]);
+                }
             }
-			Console.ReadKey();
+
+			void popolaSquadra(String _nome, Persona _presidente, Persona _allenatore, String _stadio)
+            {
+				getGiocatori(_nome);
+				Persona[] parametroGiocatori = new Persona[30];
+                for (int i = 0; i < 30; i++)
+                {
+					parametroGiocatori[i] = giocatori[i];
+                }
+				squadre.Add(new Squadra(_nome, _presidente, _allenatore, _stadio, parametroGiocatori));
+            }
+
+			void getGiocatori(String _nomeSquadra)
+            {
+				listaGiocatori.Clear();
+				foreach (String[] player in giocatoriSplitted)
+				{
+					if (_nomeSquadra == player[3]) listaGiocatori.Add(player);
+				}
+
+				foreach (String[] pl in listaGiocatori)
+				{
+					giocatori.Add(new Persona(pl[1], pl[0], makeCF(), Convert.ToDateTime(pl[2])));	
+				}
+			}
+
+			String makeCF()
+            {
+				String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				Random random = new Random();
+				String CF = "";
+				for (int i = 0; i < 6; i++) CF += alfabeto[random.Next(0, alfabeto.Length)];
+				CF += random.Next(0, 10);
+				CF += random.Next(0, 10);
+				CF += alfabeto[random.Next(0, alfabeto.Length)];
+				CF += random.Next(0, 10);
+				CF += random.Next(0, 10);
+				CF += alfabeto[random.Next(0, alfabeto.Length)];
+				CF += random.Next(0, 10);
+				CF += random.Next(0, 10);
+				CF += random.Next(0, 10);
+				CF += alfabeto[random.Next(0, alfabeto.Length)];
+				return CF;
+			}
+
+			void findSquadre(String _nomeSquadra)
+            {
+				Boolean trovato = false;
+                foreach (String nome in nomiSquadre)
+                {
+					if (nome == _nomeSquadra) trovato = true;
+                }
+
+				if (!trovato) nomiSquadre.Add(_nomeSquadra);
+            }
 		}
 	}
 }

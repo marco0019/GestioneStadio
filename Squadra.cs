@@ -18,10 +18,11 @@ namespace GestioneCampionato
 		public Persona Presidente { get => presidente; set => presidente = value; }
 		public string Nome { get => nome;}
 		public string Stadio { get => stadio; }
-		public Squadra(String _nome, Persona _presidente, String _stadio, Persona[] _giocatori)
+		public Squadra(String _nome, Persona _presidente, Persona _allenatore,String _stadio, Persona[] _giocatori)
 		{
 			this.nome = _nome[0].ToString().ToUpper() + _nome.Substring(1).ToString().ToLower();
 			this.Presidente = _presidente;
+			this.Allenatore = _allenatore;
 			this.stadio = _stadio;
 			this.Giocatori = _giocatori;
 			this.NumeroGiocatori++;

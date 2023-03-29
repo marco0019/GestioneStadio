@@ -63,3 +63,7 @@ dkms.conf
 /obj/Debug/GestioneCampionato.csproj.FileListAbsolute.txt
 /obj/Debug/GestioneCampionato.exe
 /obj/Debug/GestioneCampionato.pdb
+obj/Debug/GestioneCampionato.csproj.AssemblyReference.cache
+App.config
+GestioneCampionato.csproj
+*.config
