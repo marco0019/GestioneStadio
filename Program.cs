@@ -27,7 +27,10 @@ namespace GestioneCampionato
 
 			Campionato objCampionato = new Campionato();
 			objCampionato.GetPersone();
-			objCampionato.VisualizzaPersona();
+			objCampionato.MakeSquadre();
+			//objCampionato.VisualizzaPersona();
+			//objCampionato.VisualizzaNomiSquadre();
+			objCampionato.VisualizzaSquadre();
 			Console.ReadKey();
 		}
 	}

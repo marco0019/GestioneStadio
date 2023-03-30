@@ -52,13 +52,17 @@ namespace GestioneCampionato
 			this.Presidente.Visualizza();
 			Console.WriteLine("Allenatore: ");
 			this.Allenatore.Visualizza();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine();
 			Console.WriteLine("Stadio: " + this.Stadio);
 			Console.WriteLine();
 			Console.WriteLine("Rosa: ");
-            for (int i = 0; i < this.NumeroGiocatori; i++)
+            for (int i = 0; i < this.Giocatori.Length; i++)
             {
-				Console.Write(this.Giocatori[i].Cognome + " " + this.Giocatori[i].Nome);
-				if (i % 2 == 0) Console.WriteLine(); 
+				Console.Write(this.Giocatori[i].Cognome + " " + this.Giocatori[i].Nome + " || ");
+				if (i % 2 == 0) Console.WriteLine();
+				if (this.Giocatori[i + 1] == null) break;
             }
 		}
 
