@@ -15,7 +15,7 @@ namespace GestioneCampionato
 		//List<String> codiceFischiato = new List<String>(); // :)					FabrizioZampetti
 		public List<Squadra> squadre = new List<Squadra>();
 		Boolean trovato;
-
+        
 
 		private StreamReader SR = new StreamReader("DB_Giocatori.txt");
 

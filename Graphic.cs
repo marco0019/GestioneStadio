@@ -7,7 +7,7 @@ namespace GestioneCampionato
 	{
 		static string border = "═║╚╝╗╔";
 		public static void WindowSize(int width, int height)
-		{
+		{/*
 			Console.SetWindowPosition(0, 0);
 			if(Console.WindowWidth > width)
 			{
@@ -18,7 +18,7 @@ namespace GestioneCampionato
 			{
 				Console.SetBufferSize(width, height);
 				Console.SetWindowSize(width, height);
-			}
+			}*/
 		}
 		public static void Rect(int x, int y, string text="  ", ConsoleColor bg=ConsoleColor.Black, ConsoleColor fg = ConsoleColor.Black, bool setBG= true)
 		{
@@ -89,8 +89,8 @@ namespace GestioneCampionato
 		public static void Clear(int type = 0, int delay = 0)
 		{
 			Console.CursorVisible = false;
-			Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
-			Console.SetWindowPosition(0, 0);
+			//Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
+			//Console.SetWindowPosition(0, 0);
 			Action[] transitions =
 			{
 				delegate ()
@@ -138,9 +138,9 @@ namespace GestioneCampionato
 				}
 			};
 			transitions[type % transitions.Length]();
-			Console.SetWindowPosition(0, 0);
+			//Console.SetWindowPosition(0, 0);
 		}
-		public static void Switcher(string title, int x, int y, string[] texts, Action[] method, ref int index, int delay, int font = 0, bool responsive = false, bool center = false)
+		public static void Switcher(string title, int x, int y, string[] texts, ref int index, int delay, int font = 0, bool responsive = false, bool center = false)
 		{
 			int[] lineHeight = { 1, 12, 2, 6, 1 };
 			int width = 0;
@@ -158,8 +158,6 @@ namespace GestioneCampionato
 					if (key == ConsoleKey.LeftArrow | key == ConsoleKey.A) if (index + texts.Length / 2 < texts.Length) index += texts.Length / 2;
 					if (key == ConsoleKey.D | key == ConsoleKey.RightArrow) if (index - (texts.Length - texts.Length / 2) > -1) index -= texts.Length - texts.Length / 2;
 				}
-			method[index]();
-			Console.ReadKey();
 		}
 
 		static void DrawSwitcher(int x, int y, string[] texts, int index, int lineHeight, bool responsive, bool center, int width)
@@ -175,9 +173,9 @@ namespace GestioneCampionato
 					Rect(x + 2, y + i + lineHeight + 1, StringFormat(i == index ? " <" + texts[i] + ">" : "  " + texts[i], 30, "center"), color[Convert.ToInt16(index != i)], color[Convert.ToInt16(index == i)], setBG: index == i);
 			else
 			{
-				for (int i = 0; i < Math.Round(texts.Length / Convert.ToDouble(2)); i++)
+				for (int i = 0; i < Math.Round(texts.Length / Convert.ToDouble(2) + .1); i++)
 					Rect(x + 2, y + i * 2 + lineHeight + 1, i == index ? " <" + StringFormat(texts[i] + ">", 20) : "  " + StringFormat(texts[i], 20), color[Convert.ToInt16(index != i)], color[Convert.ToInt16(index == i)], setBG: index == i);
-				for (int i = (int)Math.Round(texts.Length / Convert.ToDouble(2)); i < texts.Length; i++) Rect(x + 27, y + (i - (int)Math.Round(texts.Length / Convert.ToDouble(2))) * 2 + lineHeight + 1, i == index ? " <" + StringFormat(texts[i] + ">", 20) : "  " + StringFormat(texts[i], 20), color[Convert.ToInt16(index != i)], color[Convert.ToInt16(index == i)], setBG: index == i);
+				for (int i = (int)Math.Round(texts.Length / Convert.ToDouble(2) + .1); i < texts.Length; i++) Rect(x + 27, y + (i - (int)Math.Round(texts.Length / Convert.ToDouble(2) + .1)) * 2 + lineHeight + 1, i == index ? " <" + StringFormat(texts[i] + ">", 20) : "  " + StringFormat(texts[i], 20), color[Convert.ToInt16(index != i)], color[Convert.ToInt16(index == i)], setBG: index == i);
 			}
 		}
 		static string StringFormat(string text, int target, string textAlign="start")

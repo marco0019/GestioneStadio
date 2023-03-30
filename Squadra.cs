@@ -64,6 +64,7 @@ namespace GestioneCampionato
 				if (i % 2 == 0) Console.WriteLine();
 				if (this.Giocatori[i + 1] == null) break;
             }
+			Console.ReadKey();
 		}
 
 		public void Sostituisci(String _ruolo, Persona _old, Persona _new)
