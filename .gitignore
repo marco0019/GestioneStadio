@@ -1,69 +1,17 @@
-
-### C ###
-# Prerequisites
-*.d
-
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-*.exe
-*.pdb
-*.suo
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-*.vs/
-obj/
-bin/
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
 /obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /.vs/GestioneCampionato/v17/.suo
 /bin/Debug/GestioneCampionato.exe
+/bin/Debug/GestioneCampionato.exe.config
 /bin/Debug/GestioneCampionato.pdb
 /obj/Debug/GestioneCampionato.csproj.FileListAbsolute.txt
 /obj/Debug/GestioneCampionato.exe
 /obj/Debug/GestioneCampionato.pdb
 obj/Debug/GestioneCampionato.csproj.AssemblyReference.cache
-App.config
+./App.config
 GestioneCampionato.csproj
 *.config
+./README.md
+./GestioneCampionato.csproj
+./GestioneCampionato.sln
+./GestioneCampionato.csproj.CoreCompileInputs.cache
+./GestioneCampionato.csproj.SuggestedBindingRedirects.cache
