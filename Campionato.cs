@@ -21,7 +21,7 @@ namespace GestioneCampionato
 
 		public void GetPersone()
         {
-			String[] persona = new String[10];
+			String[] persona;
 			for (int i = 0; !SR.EndOfStream; i++)
 			{
 				persona = SR.ReadLine().Split(',');
@@ -34,7 +34,10 @@ namespace GestioneCampionato
 				if (!trovato) nomiSquadre.Add(persona[3]);
 			}
 		}
-
+		public void VisualizzaPersone()
+		{
+			foreach (var persona in persone) Console.WriteLine(persona.Nome);
+		}
 		public void VisualizzaSquadre()
         {
             foreach (Squadra squad in squadre)
@@ -107,7 +110,35 @@ namespace GestioneCampionato
 		//	return false;
   //      }
 
-
+		public void MakeSquadrePerfectMethod()
+		{
+			var read = new StreamReader("squadre.csv");
+			string[] info;
+			List<Persona> giocatori = new List<Persona>();
+			while (!read.EndOfStream)
+			{
+				info = read.ReadLine().Split(',');
+				Console.WriteLine(info[0]);
+				squadre.Add(new Squadra(info[0], new Persona(info[5].Split(' ')[0], info[5].Split(' ')[1], MakeCF(), RandomBD()), new Persona(info[3].Split(' ')[0], info[3].Split(' ')[1], MakeCF(), Convert.ToDateTime(info[4])), info[2], GetPlayerFromTeam(info[0])));
+			}
+		}
+		public Persona[] GetPlayerFromTeam(string _nomeSquadra)
+		{
+			Persona[] giocatori = new Persona[30];
+			var read = new StreamReader("DB_Giocatori.txt");
+			string[] info;
+			int count = 0;
+			while (!read.EndOfStream & count < 30)
+			{
+				info = read.ReadLine().Split(',');
+				if (info[3].ToLower().Trim() == _nomeSquadra.ToLower().Trim())
+				{
+					giocatori[count] = new Persona(info[1], info[0], MakeCF(), Convert.ToDateTime(info[2]));
+					count++;
+				}
+			}
+			return giocatori;
+		}
 		public void MakeSquadre()
         {
 			List<Persona> giocatori = new List<Persona>();
@@ -138,7 +169,6 @@ namespace GestioneCampionato
 				squadre.Add(new Squadra(nomeSquadra, new Persona("Nome Presidente " + nomeSquadra, "Cognome Presidente " + nomeSquadra, MakeCF(), RandomBD()), new Persona("Nome Allenatore " + nomeSquadra, "Cognome Allenatore " + nomeSquadra, MakeCF(), RandomBD()), "Stadio " + nomeSquadra, arrayGiocatori));
 			}
         }
-
 
 		DateTime RandomBD()
         {

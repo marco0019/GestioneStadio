@@ -15,7 +15,8 @@ namespace GestioneCampionato
 
 			Campionato objCampionato = new Campionato();
 			objCampionato.GetPersone();
-			objCampionato.MakeSquadre();
+			objCampionato.MakeSquadrePerfectMethod();
+			Console.ReadKey();
 			while (true)
 			{
 				Graphic.Clear();
@@ -27,7 +28,7 @@ namespace GestioneCampionato
 			Console.WriteLine("Stagione finita");
 			Console.ReadKey();
 		}
-		public static string[] GetNomeSquadre(List<string> _squadre)
+		public static string[] GetNomeSquadre(List<Squadra> _squadre)
 		{
 			string[] sq = new string[_squadre.Count + 1];
 			for (int i = 0; i < _squadre.Count; i++) sq[i] = _squadre[i].Nome;

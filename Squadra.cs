@@ -25,7 +25,7 @@ namespace GestioneCampionato
 			this.Allenatore = _allenatore;
 			this.stadio = _stadio;
 			this.Giocatori = _giocatori;
-			this.NumeroGiocatori++;
+			this.NumeroGiocatori = _giocatori.Length;
 		}
 
 		public void Inserimento(Persona _persona, String _ruolo = "giocatore")
@@ -58,11 +58,11 @@ namespace GestioneCampionato
 			Console.WriteLine("Stadio: " + this.Stadio);
 			Console.WriteLine();
 			Console.WriteLine("Rosa: ");
-            for (int i = 0; i < this.Giocatori.Length; i++)
+            for (int i = 0; i < NumeroGiocatori; i++)
             {
+				if (Giocatori[i] == null) continue;
 				Console.Write(this.Giocatori[i].Cognome + " " + this.Giocatori[i].Nome + " || ");
 				if (i % 2 == 0) Console.WriteLine();
-				if (this.Giocatori[i + 1] == null) break;
             }
 			Console.ReadKey();
 		}
