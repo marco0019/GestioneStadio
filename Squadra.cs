@@ -101,5 +101,18 @@ namespace GestioneCampionato
 			this.Giocatori[this.NumeroGiocatori - 2] = null;
 			this.NumeroGiocatori--;
 		}
+
+		public void ModificaGiocatore(String _CF)
+        {
+			if (this.Presidente.CodiceFiscale == _CF) { this.Presidente.Visualizza(); this.Presidente.ModificaPersona(); }
+			else if (this.Allenatore.CodiceFiscale == _CF) { this.Allenatore.Visualizza(); this.Allenatore.ModificaPersona(); }
+			else
+            {
+                foreach (Persona giocatore in this.Giocatori)
+                {
+					if (giocatore.CodiceFiscale == _CF) {giocatore.Visualizza(); giocatore.ModificaPersona(); }
+                }
+            }
+        }
 	}
 }

@@ -45,5 +45,17 @@ namespace GestioneCampionato
 			Graphic.Rect(1, 14, "PRESS ANY KEY TO COME BACK", setBG: false, fg: ConsoleColor.White);
 			Console.ReadKey();
 		}
+
+		public void ModificaPersona()
+        {
+			Console.Write("Cognome: ");
+			this.Cognome = Console.ReadLine().Trim();
+			Console.Write("Nome: ");
+			this.Nome = Console.ReadLine().Trim();
+			Console.Write("Data di nascita: ");
+			this.DataNascita = Convert.ToDateTime(Console.ReadLine().Trim());
+			Console.Write("Codice fiscale: ");
+			this.CodiceFiscale = Console.ReadLine();
+        }
 	}
 }

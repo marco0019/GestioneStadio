@@ -25,7 +25,7 @@ namespace GestioneCampionato
 			for (int i = 0; !SR.EndOfStream; i++)
 			{
 				persona = SR.ReadLine().Split(',');
-				persone.Add(new Persona(persona[1], persona[0], MakeCF(), Convert.ToDateTime(persona[2])));
+				persone.Add(new Persona(persona[1].Trim(), persona[0].Trim(), MakeCF(), Convert.ToDateTime(persona[2].Trim())));
 				trovato = false;
 				for (int j = 0; j < nomiSquadre.Count; j++)
 				{
