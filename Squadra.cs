@@ -49,9 +49,9 @@ namespace GestioneCampionato
 		{
 			Console.WriteLine(this.Nome);
 			Console.WriteLine("Presidente: ");
-			this.Presidente.Visualizza();
+			this.Presidente.Visualizza("presidente");
 			Console.WriteLine("Allenatore: ");
-			this.Allenatore.Visualizza();
+			this.Allenatore.Visualizza("allenatore");
 			Console.WriteLine();
 			Console.WriteLine();
 			Console.WriteLine();
@@ -66,7 +66,30 @@ namespace GestioneCampionato
             }
 			Console.ReadKey();
 		}
-
+		public void Visualizza1()
+		{
+			int index = 0, indexCopy;
+			var persone = new List<Persona>() { Presidente, Allenatore };
+			foreach(var giocatore in Giocatori)persone.Add(giocatore);
+			Console.Clear();
+			persone[0].Visualizza("presidente", false);
+			var key = ConsoleKey.B;
+			do
+			{
+				indexCopy = index;
+				if (Console.KeyAvailable)
+				{
+					key = Console.ReadKey(true).Key;
+					if (key == ConsoleKey.W | key == ConsoleKey.UpArrow) index = index - 1 < 0 ? persone.Count - 1 : index - 1;
+					else if (key == ConsoleKey.S | key == ConsoleKey.DownArrow) index = index + 1 > persone.Count - 1 ? 0 : index + 1;
+				}
+				if (indexCopy != index)
+				{
+					Console.Clear();
+					persone[index].Visualizza(index == 0 ? "presidente" : index == 1 ? "allenatore" : "giocatore", false);
+				}
+			} while (key != ConsoleKey.Enter & key != ConsoleKey.Escape);
+		}
 		public void Sostituisci(String _ruolo, Persona _old, Persona _new)
         {
             switch (_ruolo.ToLower())

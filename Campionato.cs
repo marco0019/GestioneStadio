@@ -102,24 +102,25 @@ namespace GestioneCampionato
 		}
 
 		//Boolean ControlloCF(String _cf)
-  //      {
-  //          foreach (String codiceF in codiceFischiato)
-  //          {
+		//      {
+		//          foreach (String codiceF in codiceFischiato)
+		//          {
 		//		if (codiceF == _cf) return true;
-  //          }
+		//          }
 		//	return false;
-  //      }
+		//      }
 
+		
 		public void MakeSquadrePerfectMethod()
 		{
 			var read = new StreamReader("squadre.csv");
 			string[] info;
-			List<Persona> giocatori = new List<Persona>();
 			while (!read.EndOfStream)
 			{
 				info = read.ReadLine().Split(',');
-				Console.WriteLine(info[0]);
-				squadre.Add(new Squadra(info[0], new Persona(info[5].Split(' ')[0], info[5].Split(' ')[1], MakeCF(), RandomBD()), new Persona(info[3].Split(' ')[0], info[3].Split(' ')[1], MakeCF(), Convert.ToDateTime(info[4])), info[2], GetPlayerFromTeam(info[0])));
+				persone.Add(new Persona(info[5].Split(' ')[0], info[5].Split(' ')[1], MakeCF(), RandomBD()));
+				persone.Add(new Persona(info[3].Split(' ')[0], info[3].Split(' ')[1], MakeCF(), Convert.ToDateTime(info[4])));
+				squadre.Add(new Squadra(info[0], persone[persone.Count - 2], persone[persone.Count - 1], info[2], GetPlayerFromTeam(info[0])));
 			}
 		}
 		public Persona[] GetPlayerFromTeam(string _nomeSquadra)
@@ -176,6 +177,13 @@ namespace GestioneCampionato
 			String bd_string = (random.Next(1, 28)).ToString() + "/" + random.Next(1,13) + "/" + random.Next(1960, 1991);
 			DateTime dt = Convert.ToDateTime(bd_string);
 			return dt;
-        }
+		}
+		public string[] GetNomeSquadre(List<Squadra> _squadre)
+		{
+			string[] sq = new string[_squadre.Count + 1];
+			for (int i = 0; i < _squadre.Count; i++) sq[i] = _squadre[i].Nome;
+			sq[_squadre.Count] = "exit";
+			return sq;
+		}
 	}
 }
