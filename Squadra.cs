@@ -66,13 +66,54 @@ namespace GestioneCampionato
             }
 			Console.ReadKey();
 		}
+		public void Menu()
+		{
+			int index = 0;
+			Graphic.Clear();
+			Graphic.Switcher(Nome, 0, 0, new string[] { "Presidente", "Allenatore", "Giocatori", "Partite", "Modifica presidente", "Modifica allenatore", "Modifica giocatore", "Elimina giocatore", "EXIT" }, ref index, 0, 1);
+			new Action[]
+			{
+				delegate(){ Presidente.Visualizza("presidente");Menu(); },
+				delegate(){ Allenatore.Visualizza("allenatore");Menu(); },
+				delegate(){Visualizza1(); Menu(); },
+				delegate(){Console.WriteLine("Visualizza partite"); Menu(); },
+				delegate(){Presidente.ModificaPersona(); Menu(); },
+				delegate(){Allenatore.ModificaPersona(); Menu();},
+				delegate ()
+				{
+					int playerIndex = 0;
+					Graphic.Clear();
+					Graphic.WindowSize(51, 35);
+					Graphic.Switcher("modifica", 0, 0, GetPlayerName(), ref playerIndex, 0, 1);
+					Console.Clear();
+					Giocatori[playerIndex].ModificaPersona();
+					Menu();
+				},
+				delegate ()
+				{
+					int playerIndex = 0;
+					Graphic.Clear();
+					Graphic.WindowSize(51, 35);
+					Graphic.Switcher("modifica", 0, 0, GetPlayerName(), ref playerIndex, 0, 1);
+					EliminaGioatore(Giocatori[playerIndex]);
+					Menu();
+				},
+				delegate(){}
+			}[index]();
+		}
+		private string[] GetPlayerName()
+		{
+			List<string> name = new List<string>();
+			for (int i = 0; i < NumeroGiocatori; i++) if (Giocatori[i] != null) if (Giocatori[i].Cognome != String.Empty & Giocatori[i].Cognome != null) name.Add(Convert.ToString(Giocatori[i].Cognome));
+			return name.ToArray();
+		}
 		public void Visualizza1()
 		{
 			int index = 0, indexCopy;
-			var persone = new List<Persona>() { Presidente, Allenatore };
+			var persone = new List<Persona>();
 			foreach(var giocatore in Giocatori)persone.Add(giocatore);
 			Console.Clear();
-			persone[0].Visualizza("presidente", false);
+			persone[0].Visualizza("giocatore", false);
 			var key = ConsoleKey.B;
 			do
 			{
@@ -86,7 +127,7 @@ namespace GestioneCampionato
 				if (indexCopy != index)
 				{
 					Console.Clear();
-					persone[index].Visualizza(index == 0 ? "presidente" : index == 1 ? "allenatore" : "giocatore", false);
+					persone[index].Visualizza("giocatore", false);
 				}
 			} while (key != ConsoleKey.Enter & key != ConsoleKey.Escape);
 		}

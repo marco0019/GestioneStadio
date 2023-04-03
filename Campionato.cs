@@ -9,7 +9,6 @@ namespace GestioneCampionato
 {
 	internal class Campionato
 	{
-		private Squadra[] Squadre = new Squadra[20];
 		private List<Persona> persone = new List<Persona>();
 		List<String> nomiSquadre = new List<String>();
 		//List<String> codiceFischiato = new List<String>(); // :)					FabrizioZampetti
@@ -33,10 +32,6 @@ namespace GestioneCampionato
 				}
 				if (!trovato) nomiSquadre.Add(persona[3]);
 			}
-		}
-		public void VisualizzaPersone()
-		{
-			foreach (var persona in persone) Console.WriteLine(persona.Nome);
 		}
 		public void VisualizzaSquadre()
         {

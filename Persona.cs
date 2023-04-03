@@ -13,7 +13,6 @@ namespace GestioneCampionato
 		{
 			Nome = nome;
 			Cognome = cognome;
-			CodiceFiscale = codiceFiscale;
 			DataNascita = dataNascita;
 			CodiceFiscale = MakeCF(this);
 		}
@@ -59,8 +58,7 @@ namespace GestioneCampionato
 			this.Nome = Console.ReadLine().Trim();
 			Console.Write("Data di nascita: ");
 			this.DataNascita = Convert.ToDateTime(Console.ReadLine().Trim());
-			Console.Write("Codice fiscale: ");
-			this.CodiceFiscale = Console.ReadLine();
+			CodiceFiscale = MakeCF(this);
         }
 		public string MakeCF(Persona persona)
 		{
@@ -75,7 +73,7 @@ namespace GestioneCampionato
 			cf += mese[Convert.ToInt16(persona.DataNascita.ToString("MM")) - 1];
 			// Giorno
 			cf += persona.DataNascita.ToString("dd");
-			// Comune di nascita
+			// Comune di nascita estratto casualmente
 			string alfabeto = "abcdefghijklmn";
 			cf += alfabeto[new Random().Next(0, alfabeto.Length)].ToString();
 			cf += new Random().Next(100, 1000).ToString();
@@ -93,6 +91,7 @@ namespace GestioneCampionato
 		}
 		string GetName(string name)
 		{
+			name = name.Trim();
 			string result = "";
 			if (name.Length < 3)
 			{
@@ -102,26 +101,25 @@ namespace GestioneCampionato
 			else
 			{
 				// Mette tutte le vocali
-				string consonanti = GetConsonanti(name);
+				string consonanti = GetWord(name);
+				string vocali = GetWord(name, false);
 				if (consonanti.Length >= 3) result = consonanti.Substring(0, 3);
-				else
-				{
-					result = consonanti;
-					result = formatWithX(result);
-				}
+				else if(vocali.Length >= 3 - consonanti.Length)result = consonanti + vocali.Substring(0, 3 - consonanti.Length);
+				else result = formatWithX(consonanti + vocali);
 			}
-			string formatWithX(string word)
+			string formatWithX(string word)// Aggiunge le X se il nome dovesse essere troppo corto
 			{
-				for (int i = 0; i < 3 - word.Length; i++) word += "X";
+				for (int i = 0; i <= 3 - word.Length; i++) word += "X";
 				return word;
 			}
 			return result;
 		}
-		string GetConsonanti(string name)
+		string GetWord(string name, bool consonanti = true)
 		{
-			string vocali = "aeiou";
+			string vocali = "aeiouhy ";
 			var result = "";
-			for (int i = 0; i < name.Length; i++) if (!vocali.Contains(name[i])) result += name[i].ToString();
+			if (consonanti) { for (int i = 0; i < name.Length; i++) if (!vocali.Contains(name[i])) result += name[i].ToString(); }
+			else for (int i = 0; i < name.Length; i++) if (vocali.Contains(name[i])) result += name[i].ToString();
 			return result;
 		}
 	}
