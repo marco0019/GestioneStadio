@@ -18,6 +18,7 @@ namespace GestioneCampionato
 		public Persona Presidente { get => presidente; set => presidente = value; }
 		public string Nome { get => nome;}
 		public string Stadio { get => stadio; }
+		public int Punteggio { get; set; }
 		public Squadra(String _nome, Persona _presidente, Persona _allenatore,String _stadio, Persona[] _giocatori)
 		{
 			this.nome = _nome[0].ToString().ToUpper() + _nome.Substring(1).ToString().ToLower();
@@ -26,6 +27,7 @@ namespace GestioneCampionato
 			this.stadio = _stadio;
 			this.Giocatori = _giocatori;
 			this.NumeroGiocatori = _giocatori.Length;
+			Punteggio = 0;
 		}
 
 		public void Inserimento(Persona _persona, String _ruolo = "giocatore")
