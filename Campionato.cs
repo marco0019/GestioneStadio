@@ -13,13 +13,13 @@ namespace GestioneCampionato
 		List<String> nomiSquadre = new List<String>();
 		//List<String> codiceFischiato = new List<String>(); // :)					FabrizioZampetti
 		public List<Squadra> squadre = new List<Squadra>();
-		Boolean trovato;
-        
+		Boolean trovato;       
 
-		private StreamReader SR = new StreamReader("DB_Giocatori.txt");
+		
 
 		public void GetPersone()
         {
+			StreamReader SR = new StreamReader("DB_Giocatori.txt");
 			String[] persona;
 			for (int i = 0; !SR.EndOfStream; i++)
 			{
@@ -32,6 +32,7 @@ namespace GestioneCampionato
 				}
 				if (!trovato) nomiSquadre.Add(persona[3]);
 			}
+			SR.Close();
 		}
 		public void VisualizzaSquadre()
         {
@@ -137,13 +138,13 @@ namespace GestioneCampionato
 		}
 		public void MakeSquadre()
         {
+			StreamReader SR = new StreamReader("DB_Giocatori.txt");
 			List<Persona> giocatori = new List<Persona>();
 			Persona[] arrayGiocatori = new Persona[30];
-			this.SR = new StreamReader("DB_Giocatori.txt");
 			foreach (String nomeSquadra in nomiSquadre)
             {
 				String[] persona = new String[10];
-				for (int i = 0; !this.SR.EndOfStream; i++)
+				for (int i = 0; !SR.EndOfStream; i++)
 				{
 					persona = SR.ReadLine().Split(',');
 					if (persona[3] == nomeSquadra)
@@ -164,6 +165,7 @@ namespace GestioneCampionato
 
 				squadre.Add(new Squadra(nomeSquadra, new Persona("Nome Presidente " + nomeSquadra, "Cognome Presidente " + nomeSquadra, MakeCF(), RandomBD()), new Persona("Nome Allenatore " + nomeSquadra, "Cognome Allenatore " + nomeSquadra, MakeCF(), RandomBD()), "Stadio " + nomeSquadra, arrayGiocatori));
 			}
+			SR.Close();
         }
 
 		DateTime RandomBD()
@@ -180,5 +182,20 @@ namespace GestioneCampionato
 			sq[_squadre.Count] = "exit";
 			return sq;
 		}
+
+
+		public void UpdateGiocatori()
+        {
+			StreamWriter SW = new StreamWriter("DB_Giocatori.txt");
+            foreach (Squadra squadra in squadre)
+            {
+                foreach (Persona giocatore in squadra.Giocatori)
+                {
+					SW.WriteLine(giocatore.Cognome + "," + giocatore.Nome + "," + giocatore.DataNascita + "," + squadra.Nome);
+                }
+            }
+
+			SW.Close();
+        }
 	}
 }
