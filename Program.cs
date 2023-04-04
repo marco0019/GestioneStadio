@@ -1,34 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-
-namespace GestioneCampionato
+﻿var options = new Supabase.SupabaseOptions
 {
-	class Program
-	{
-		static void Main(string[] args)
-		{
-			int index = 0;
-
-			Action[] metodi =
-			{
-				delegate () { Console.WriteLine("metodo 1"); },
-				delegate () { Console.WriteLine("metodo 2"); },
-				delegate () { Console.WriteLine("metodo 3"); },
-				delegate () { Console.WriteLine("metodo 4"); },
-				delegate () { Console.WriteLine("metodo 5"); },
-				delegate () { Console.WriteLine("metodo 6"); },
-				delegate () { Console.WriteLine("metodo 7"); },
-				delegate () { Console.WriteLine("metodo 8"); },
-			};
-
-			Campionato objCampionato = new Campionato();
-			objCampionato.GetPersone();
-			objCampionato.VisualizzaPersona();
-			Console.ReadKey();
-		}
-	}
-}
+	AutoRefreshToken = true,
+	AutoConnectRealtime = true
+};
+//Environment.GetEnvironmentVariable("klW+TgbLxQ3P4bf/2nayH4ev/Xu5ReLzfRWyWN9Ye+xaH+ry0PRT2NgwBCDoMO4SQ1ApajSETXfDX/78DldUeA==")
+var supabase = new Supabase.Client("https://lxryqcdezawobgxcnjek.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx4cnlxY2RlemF3b2JneGNuamVrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4MDYwNDQ5NSwiZXhwIjoxOTk2MTgwNDk1fQ.6C1qcETGdEwnlPU7qT6HGLbRPA6i563BtnV5Q4SpBg8", options);
+Console.WriteLine("Mi sto connettendo...");
+supabase.InitializeAsync();
+Console.WriteLine("Connesso...");
